@@ -1,6 +1,6 @@
---
+-- Testing deployment
 -- PostgreSQL database dump
---
+-- Testing
 
 -- Dumped from database version 9.5.4
 -- Dumped by pg_dump version 9.5.4
