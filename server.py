@@ -11,6 +11,7 @@ app = Flask(__name__)
 # Required to use Flask sessions, Debug toolbar
 app.secret_key = "daksfhausdfskgbxpuseswlduc"
 
+
 # For debugging - see Jinja fails
 app.jinja_env.undefined = StrictUndefined
 app.jinja_env.auto_reload = True
@@ -214,7 +215,13 @@ def show_locations():
     """Show local pickup locations"""
 
     pickups = db.session.query(Pickup).filter(Pickup.pickup_id > 1).all()
-    return render_template("locations.html", pickups=pickups)
+   [3:11 PM] Ebomah, Henry
+if os.environ["LOCATION_FEATURE_ENABLED"] == "True":
+        pickups = db.session.query(Pickup).filter(Pickup.pickup_id > 1).all()
+        return render_template("locations.html", pickups=pickups)
+    else:
+        return render_template("coming-soon.html")
+
 
 
 @app.route('/cart')
@@ -222,7 +229,7 @@ def show_cart():
     """Query session for cart contents and display results"""
     
     # send flag for feature toggle to cart page
-    return render_template("cart.html")
+   return render_template("cart.html", flag=os.environ["LOCATION_FEATURE_ENABLED"])
 
 
 @app.route('/cart', methods=['POST'])
